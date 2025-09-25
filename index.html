@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>O Destino Misterioso</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <!-- Áudio global -->
+    <audio id="bgMusic" src="/assets/musica.mp3" preload="auto" loop></audio>
+    <!-- Som da máquina de escrever (só durante a animação) -->
+<audio id="typeSound" src="/assets/typewriter-loop.mp3" preload="auto"></audio>
+
+    <!-- ===== GATE (Código 1511) ===== -->
+    <section class="screen active" id="gate" style="--bg:url('/assets/intro-bg.jpg')">
+      <div class="wrap glass gate-card">
+        <h2>Introduz o código</h2>
+        <p class="hint">A verdade abre-se a quem conhece a chave…</p>
+
+        <div class="gate-input">
+          <input id="gateCode" type="password" inputmode="numeric" pattern="[0-9]*"
+                 maxlength="4" placeholder="____" autocomplete="one-time-code"
+                 aria-label="Código de 4 dígitos" />
+          <button class="btn" id="gateBtn">Entrar</button>
+        </div>
+
+        <!-- Teclado numérico -->
+        <div class="numpad" aria-label="Teclado numérico">
+          <button class="np" data-k="1">1</button>
+          <button class="np" data-k="2">2</button>
+          <button class="np" data-k="3">3</button>
+          <button class="np" data-k="4">4</button>
+          <button class="np" data-k="5">5</button>
+          <button class="np" data-k="6">6</button>
+          <button class="np" data-k="7">7</button>
+          <button class="np" data-k="8">8</button>
+          <button class="np" data-k="9">9</button>
+          <button class="np np-aux" data-k="del">⌫</button>
+          <button class="np" data-k="0">0</button>
+          <button class="np np-aux" data-k="ok">OK</button>
+        </div>
+
+        <p id="gateErr" class="err hidden">Código incorreto. Tenta outra vez.</p>
+      </div>
+    </section>
+
+    <!-- ===== INTRO ===== -->
+    <section class="screen" id="intro" style="--bg:url('/assets/intro-bg.jpg')">
+      <!-- camadas subtis -->
+      <div class="intro-overlay">
+        <img src="/assets/simbolo-chave.png" class="intro-symbol s1" alt="">
+        <img src="/assets/simbolo-aviao.png" class="intro-symbol s2" alt="">
+        <img src="/assets/simbolo-sombra.png" class="intro-symbol s3" alt="">
+      </div>
+      <div class="intro-vignette"></div>
+      <div class="intro-light"></div>
+      <div class="intro-dust"></div>
+
+      <div class="wrap glass intro-content">
+        <h1>O Mistério da porta 40</h1>
+        <p class="intro-lead">
+          Esta noite, um caminho abre-se em silêncio. Três pistas, uma verdade… e um destino à tua espera.
+        </p>
+        <p id="typewriter" class="enigmatic"
+           data-text="Há 40 anos, numa colina isolada onde o vento contava segredos, nasceu uma herdeira.
+Uns dizem que herdou apenas terras… outros, que herdou mistérios guardados há gerações.
+Hoje, as portas do enigma abrem-se. Mas lembra-te: nem tudo o que vês é o que parece.."></p>
+
+        <button class="btn btn-glow" id="startBtn">Entrar no mistério</button>
+        <p class="hint">(som recomendado 🎧)</p>
+      </div>
+    </section>
+
+    <!-- ===== PISTA 1 ===== -->
+    <section class="screen" id="pista1" style="--bg:url('/assets/diario.jpg')">
+      <div class="wrap glass">
+        <h2>O Diário Assombrado</h2>
+        <p class="flavour">“Nem todas as chaves abrem portas… e nem todas as letras dizem o que parecem.”</p>
+
+        <div class="diario">
+          <p>
+            Quando o silên<span data-letter="C">C</span>io cai, o coração acelera<br/>
+            No camin<span data-letter="H">H</span>o pequenas pistas parecem fugir.<br/>
+            O destino gosta de esconder respostas à v<span data-letter="I">I</span>sta.<br/>
+            Uma palavra certa abre m<span data-letter="A">A</span>is do que imaginas.<br/>
+            Olha para o a<span data-letter="V">V</span>esso do óbvio.<br/>
+            No fim, o s<span data-letter="E">E</span>gredo revela-se.
+          </p>
+        </div>
+<!-- ===== Quando o silênCio cai, o coração acelera.
+
+Uma palavra certa abre mAis do que imaginas.
+Olha para o aVesso do óbvio.
+No fim, o sEgredo revela-se.-->
+        <div class="progress">Sequência: <strong id="seq1">—</strong></div>
+
+        <div class="nav-buttons">
+          <button class="btn btn-back" disabled>Voltar</button>
+          <button class="btn btn-next" id="toPista2" disabled>Seguinte</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PISTA 2 ===== -->
+    <section class="screen" id="pista2" style="--bg:url('/assets/espelho.jpg')">
+      <div class="wrap glass">
+        <h2>O Espelho Misterioso</h2>
+
+        <div class="espelho-area">
+          <div id="palavraEspelhoMirror" class="mirror show">PARTENZA</div>
+
+          <div class="espelho-linha">
+            <img src="/assets/esp1.jpg" alt="Espelho 1" class="espelho-img">
+            <img src="/assets/esp2.jpg" alt="Espelho 2" class="espelho-img">
+            <img src="/assets/esp3.jpg" alt="Espelho 3" class="espelho-img">
+            <img src="/assets/esp4.jpg" alt="Espelho 4" class="espelho-img">
+            <img src="/assets/esp5.jpg" alt="Espelho 5" class="espelho-img">
+          </div>
+
+          <div id="palavraEspelho" class="mirror hidden final">PARTENZA</div>
+        </div>
+
+        <p id="espelhoFrase" class="flavour">
+          O reflexo engana; a saída está no gesto. Se tudo estiver ao contrário, experimenta virar o espelho.
+          Às vezes não é olhar, é agir. Na dúvida, experimenta <span class="gatilho">virar o espelho.</span>. 
+        </p>
+
+        <p id="p2ok" class="ok hidden">O caminho está aberto…</p>
+
+        <div class="nav-buttons">
+          <button class="btn btn-back" disabled>Voltar</button>
+          <button class="btn btn-next" id="toPista3" disabled>Seguinte</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PISTA 3 ===== -->
+    <section class="screen" id="pista3" style="--bg:url('/assets/relogio.jpg')">
+      <div class="wrap glass">
+        <h2>O Relógio Parado</h2>
+
+        <p id="equacao">45 × 23 + 20 = ?</p>
+
+        <div class="timer">
+          <span id="timerLabel">Tempo</span>
+          <span id="timerValue">02:00</span>
+        </div>
+
+        <div id="p3Msgs" class="mystery"></div>
+
+        <div class="clock">
+          <label>Horas
+            <select id="horaSel">
+              <option value="">—</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="10">10</option>
+            </select>
+          </label>
+          <label>Minutos
+            <select id="minSel">
+              <option value="">—</option>
+              <option value="05">05</option>
+              <option value="00">00</option>
+              <option value="15">15</option>
+            </select>
+          </label>
+        </div>
+
+        <p id="p3ok" class="ok hidden">Tlim! A gaveta secreta abriu…</p>
+
+        <div class="nav-buttons">
+          <button class="btn btn-back" disabled>Voltar</button>
+          <button class="btn btn-next" id="toPista4" disabled>Seguinte</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PISTA 4 (PUZZLE FINAL) ===== -->
+    <section class="screen" id="pista4" style="--bg:url('/assets/porta.jpg')">
+      <div class="wrap glass">
+        <h2>O Mapa Rasgado</h2>
+        <p class="flavour">“Recompõe o caminho… e ele mostrar-se-á.”</p>
+
+        <!-- Puzzle 3x3 -->
+        <div id="puzzle" class="puzzle" data-img="/assets/milano-map.jpg" aria-label="Puzzle do mapa de Milão">
+          <!-- as peças são geradas pelo JS -->
+        </div>
+
+        <p id="p4msg" class="hint">Troca duas peças ao tocar nelas. Quando o mapa estiver completo, a passagem abre-se.</p>
+        <p id="p4ok" class="ok hidden">Perfeito. O mapa alinhou… a porta está aberta.</p>
+
+        <div class="nav-buttons">
+          <button class="btn btn-back" disabled>Voltar</button>
+          <button class="btn btn-next" id="toFinal" disabled>Seguinte</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FINAL ===== -->
+    <section class="screen" id="final" style="--bg:url('/assets/tick-rel.jpg')">
+      <div class="wrap glass">
+        <h2>Segredo Revelado ✈️</h2>
+
+     <!-- … mantém o resto do #final (títulos, contagem, botões, etc.) … -->
+
+<!-- Bilhete: agora uma foto real -->
+<!-- FOTO REAL DO BOARDING PASS -->
+<div class="ticket-photo">
+  <img id="boardingImg" src="/assets/boarding-pass.jpg" alt="Boarding pass" />
+</div>
+
+
+<!-- contador continua igual -->
+<div class="countdown">
+  <span class="label">Faltam</span> <span id="count">—</span>
+</div>
+
+
+        <p class="final-msg">Mistério resolvido. Faz as malas… Milão espera por ti!</p>
+      </div>
+    </section>
+
+    <!-- Modal vídeo local (pista 2) -->
+    <div id="videoModal" class="modal hidden">
+      <div class="modal-content">
+        <span id="closeVideo" class="close">&times;</span>
+        <video id="localVideo" controls></video>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
