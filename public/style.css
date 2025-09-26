@@ -162,6 +162,111 @@ p{line-height:1.6;font-size:1.1rem}
   margin-bottom: 8px;
 }
 
+/* imagem dentro do modal (reduzida) */
+.modal-content img {
+  width: 70%;          /* 100% - 30% = 70% do tamanho original */
+  max-width: 800px;    /* não deixar passar muito grande em ecrãs largos */
+  height: auto;
+  display: block;
+  margin: 0 auto;      /* centraliza horizontalmente */
+  border-radius: 6px;
+}
+/* Modal: fundo escuro para esconder o resto */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9); /* escurece fundo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+/* Conteúdo do modal */
+.modal-content {
+  position: relative;
+  background: transparent;
+  border-radius: 10px;
+  padding: 10px;
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Foto da tripulação: limita altura */
+.modal-content img {
+  width: 70%;          /* mantém a largura */
+  max-height: 70vh;    /* ocupa no máximo 70% da altura da janela */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 6px;
+  object-fit: contain; /* mantém proporções */
+}
+
+/* Botão de fechar */
+.close {
+  position: absolute;
+  right: 12px;
+  top: 6px;
+  font-size: 28px;
+  cursor: pointer;
+  color: #fff;
+}
+
+/* Modal: ocupa o ecrã inteiro e ofusca o fundo */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.95); /* fundo bem escuro */
+  z-index: 1000;
+  backdrop-filter: blur(3px); /* opcional: desfoca o fundo */
+}
+
+.modal.hidden {
+  display: none;
+}
+
+/* Conteúdo do modal: só a imagem e o botão fechar */
+.modal-content {
+  position: relative;
+  background: transparent;
+  border-radius: 10px;
+  padding: 0;
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Foto da tripulação: controla altura e largura */
+.modal-content img {
+  width: auto;
+  max-width: 80%;
+  max-height: 75vh; /* limita altura */
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.7);
+}
+
+/* Botão de fechar no canto */
+.close {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  font-size: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fff;
+  text-shadow: 0 0 8px rgba(0,0,0,0.8);
+}
+
 
 /* responsive */
 @media (max-width:600px){

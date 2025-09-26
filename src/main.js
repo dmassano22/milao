@@ -360,6 +360,28 @@ $("#toPista4").addEventListener("click", ()=> show("#pista4"));
   }
 })();
 
+// ===== Modal "Ver tripulação" =====
+const crewModal = document.getElementById("crewModal");
+const crewImg   = document.getElementById("crewImg");
+const openCrew  = document.getElementById("openCrew");
+const closeCrew = document.getElementById("closeCrew");
+
+// caminho da foto (troca se o ficheiro tiver outro nome)
+const crewURL = "/assets/tripulacao.jpg";
+
+openCrew?.addEventListener("click", () => {
+  if (crewImg) crewImg.src = crewURL;
+  crewModal?.classList.remove("hidden");
+});
+
+closeCrew?.addEventListener("click", () => {
+  crewModal?.classList.add("hidden");
+});
+
+crewModal?.addEventListener("click", (e) => {
+  if (e.target === crewModal) crewModal.classList.add("hidden");
+});
+
 // ===================== Final =====================
 // ===================== Final =====================
 $("#toFinal").addEventListener("click", () => {
